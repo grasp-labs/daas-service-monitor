@@ -24,10 +24,6 @@ provider:
             - 'cloudwatch:GetMetricData'
           Resource: '*'
 
-#plugins:
-#  - serverless-deployment-bucket
-
-
 package:
   patterns:
     - '!./**'
@@ -41,3 +37,4 @@ functions:
       - http:
           path: /lambda_monitor
           method: get
+          private: true
