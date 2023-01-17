@@ -1,0 +1,43 @@
+service: daas-service-monitor
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: eu-north-1
+  timeout: 30
+  deploymentBucket:
+    name: grasplabs-serverless-deployment
+    serverSideEncryption: AES256
+    blockPublicAccess: true
+  apiGateway:
+    apiKeys:
+      - daasApiKey
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 
+            - 'lambda:ListFunctions'
+            - 'lambda:GetFunction'
+            - 'cloudwatch:GetMetricData'
+          Resource: '*'
+
+#plugins:
+#  - serverless-deployment-bucket
+
+
+package:
+  patterns:
+    - '!./**'
+    - ./bin/**
+
+functions:
+  lambdamonitor:
+    name: ${self:service}-lambda
+    handler: bin/lambda_monitor
+    events:
+      - http:
+          path: /lambda_monitor
+          method: get
