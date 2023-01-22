@@ -22,7 +22,8 @@ function App() {
 
   useEffect( () => {
     const fetchMetrics = async () => {
-      await axios.get("dev/monitor/lambda/", config)
+      const rootUrl = process.env.NODE_ENV === "production" ? "https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com" : ""
+      await axios.get(`${rootUrl}/dev/monitor/lambda/`, config)
       .then(response => {
         setRows(response.data.body);
     })
