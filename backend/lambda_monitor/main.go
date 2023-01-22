@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"time"
+	"net/http"
+	"encoding/json"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -14,7 +16,38 @@ import (
 	runtime "github.com/aws/aws-lambda-go/lambda"
 )
 
-type Response events.APIGatewayProxyResponse
+func errResponse(status int, body string) events.APIGatewayV2HTTPResponse {
+	message := map[string]string{
+		"message": body,
+	}
+
+	messageBytes, _ := json.Marshal(&message)
+
+	return events.APIGatewayV2HTTPResponse{
+		StatusCode: status,
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+		},
+		Body: string(messageBytes),
+	}
+}
+
+func response(code int, object interface{}) events.APIGatewayV2HTTPResponse {
+	marshalled, err := json.Marshal(object)
+	if err != nil {
+		return errResponse(http.StatusInternalServerError, err.Error())
+	}
+
+	return events.APIGatewayV2HTTPResponse{
+		StatusCode: code,
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+		},
+		Body:            string(marshalled),
+		IsBase64Encoded: false,
+	}
+}
+
 
 type LambdaFunctionInfo struct {
 	Name                   string
@@ -22,8 +55,8 @@ type LambdaFunctionInfo struct {
 	Timeout                int64
 	LastInvocationTime     string
 	LastInvocationDuration float64
-	FunctionError          bool
-	RunTimeoutError        bool
+	Success		           bool
+	Error        		   string
 }
 
 func GetFunctions() ([]string, error) {
@@ -64,6 +97,7 @@ func RetrieveLambdaFunctionInfo(funcName string) (*LambdaFunctionInfo, error) {
 
 	info := &LambdaFunctionInfo{
 		Name: funcName,
+		Success: true,
 	}
 
 	sess, _ := session.NewSession(&aws.Config{
@@ -164,8 +198,9 @@ func RetrieveLambdaFunctionInfo(funcName string) (*LambdaFunctionInfo, error) {
 	durations := metricData.MetricDataResults[2].Values
 	if len(durations) > 0 {
 		info.LastInvocationDuration = *(durations[0]) / 1000
-		if info.LastInvocationDuration > (float64)(info.Timeout+1) {
-			info.RunTimeoutError = true
+		if info.LastInvocationDuration > (float64)(info.Timeout) {
+			info.Success = false;
+			info.Error = "timeout"
 		}
 	}
 
@@ -176,14 +211,15 @@ func RetrieveLambdaFunctionInfo(funcName string) (*LambdaFunctionInfo, error) {
 		lastInvocation := metricData.MetricDataResults[0].Timestamps[0]
 		funcError := (*lastError == *lastInvocation) || lastError.After(*lastInvocation)
 		if funcError {
-			info.FunctionError = true
+			info.Success = false
+			info.Error = "function error"
 		}
 	}
 
 	return info, nil
 }
 
-func Handler(ctx context.Context) ([]*LambdaFunctionInfo, error) {
+func Handler(ctx context.Context) (events.APIGatewayV2HTTPResponse, error) {
 	funcs, err := GetFunctions()
 	if err != nil {
 		fmt.Println(err)
@@ -199,7 +235,7 @@ func Handler(ctx context.Context) ([]*LambdaFunctionInfo, error) {
 		results = append(results, info)
 	}
 
-	return results, nil
+	return response(http.StatusOK, results), nil
 }
 
 func main() {

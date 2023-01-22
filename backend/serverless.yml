@@ -5,6 +5,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: go1.x
+  memorySize: 2048
   region: eu-north-1
   timeout: 30
   deploymentBucket:
@@ -35,6 +36,12 @@ functions:
     handler: bin/lambda_monitor
     events:
       - http:
-          path: /lambda_monitor
+          path: /monitor/lambda
           method: get
           private: true
+          caching:
+            enabled: true
+          response:
+            statusCodes:
+              200:
+                pattern: ''
