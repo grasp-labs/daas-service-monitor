@@ -12,10 +12,20 @@ function App() {
 
   const [rows, setRows] = useState([]);
 
+  var config = {
+    method: 'get',
+    headers: { 
+      'x-api-key': process.env.REACT_APP_API_KEY, 
+      'Accept': 'application/json',
+    }
+  };
+
   useEffect( () => {
     const fetchMetrics = async () => {
-      await axios.get("https://884f1eoyk4.execute-api.eu-north-1.amazonaws.com/lambda")
-      .then(response => setRows(response.data))
+      await axios.get("dev/monitor/lambda/", config)
+      .then(response => {
+        setRows(response.data.body);
+    })
       .catch(err => console.error);
     };
     fetchMetrics();
@@ -27,8 +37,8 @@ function App() {
     { title: "Timeout (s)", field: "Timeout", width: 150},
     { title: "LastInvocationTime", field: "LastInvocationTime", width: 150},
     { title: "Duration (s)", field: "LastInvocationDuration", width: 150},
-    { title: "FunctionError", field: "FunctionError", hozAlign: "center", formatter: "tickCross", width: 150},
-    { title: "RunTimeoutError", field: "RunTimeoutError", hozAlign: "center", formatter: "tickCross"},
+    { title: "Success", field: "Success", hozAlign: "center", formatter: "tickCross", width: 150},
+    { title: "Error", field: "Error", hozAlign: "center"},
   ]
 
   return (

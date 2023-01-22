@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1295.0",
     "axios": "^1.2.3",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
