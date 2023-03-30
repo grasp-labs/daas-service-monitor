@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import classes from './ErrorModal.module.css';
+import './ErrorModal.css';
 
 
 const ErrorModal = props => {
@@ -8,16 +8,16 @@ const ErrorModal = props => {
 
  return (
   <div>
-   <div className={classes.backdrop} onClick={props.onConfirm}/>
-   <Card className= {classes.modal}>
-    <header className= {classes.header}>
+   <div className="backdrop" onClick={props.onConfirm}/>
+   <Card className="modal">
+    <header className="header">
         <h2>{props.title}</h2>
     </header>
-    <div className= {classes.content}>
+    <div className="content">
         <p>{props.message}</p>
     </div>
-    <footer className= {classes.actions}>
-      <button onClick={props.onConfirm}>Ok</button>
+    <footer className= "actions">
+      <button className= "actions__button" onClick={props.onConfirm}>Ok</button>
     </footer>
    </Card>
   </div>

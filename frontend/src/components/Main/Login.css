@@ -1,28 +1,61 @@
-.form-signin {
-    max-width: 330px;
-    padding: 15px;
-    color:#4A25AA
+.body, html
+{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #221C35;
+}
+
+.form-login {
+    max-width: 300px;
+    padding:  10px 20px;
+    background-color:#E5E1E6; ;
+    border-radius: 10px;
+    width:100cm;
+    margin: auto;
+    margin-top: 70px;
+  }
+
+  .form-login__message{
+    color:  #4A25AA
+  }
+  .form-login__lable{
+    width: 300px;
+    display: inline-block;
+    margin: 0.2cm;
+    font-size: 16px;
+    color: #6467c6
   }
   
-  .form-signin .form-floating:focus-within {
-    z-index: 2;
-  }
-  
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
+  .form-login input[type="email"] {
+    margin-bottom: 1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    padding-right: 35%;
+    padding-top: 3%;
+    padding-bottom: 3%;
   }
   
-  .form-signin input[type="password"] {
+  .form-login input[type="password"] {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    padding-right: 35%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+  
+  .form-login__button {
+    border-radius: 10px;
+    padding-left: 40%;
+    padding-right: 40%;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    margin-left: 7px;
+    background-color: #4A25AA;
+    color: #E5E1E6;
+    
+    
   }
 
-  .btn-primary {
-    background-color: #6467c6
-
-    ;
-  }
  

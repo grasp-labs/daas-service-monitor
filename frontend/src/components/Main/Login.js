@@ -4,21 +4,22 @@ import {useNavigate} from 'react-router-dom'
 import './Login.css' 
 import ErrorModal from '../../UI/ErrorModal'
 
+
 function Login () {
- const [email, setEmail] =useState('');
- const [password, setPassword] =useState('');
+ const [EnteredEmail, setEnteredEmail] =useState('');
+ const [EnteredPassword, setEnteredPassword] =useState('');
  const[IsSignedIn,setIsSignedIn]= useState(false);
  const [error, setError]=useState();
  const navigate = useNavigate();
  const user = {
-  email: email,
-  password: password,
+  email: EnteredEmail,
+  password: EnteredPassword,
 }
     const handleSubmit = async (e) => {
     e.preventDefault();
      await axios.post('https://auth-dev.grasp-daas.com/rest-auth/login/', {
      "email": user.email ,
-    "password": user.password
+     "password": user.password
     })
    .then((data) => {
     localStorage.setItem('access_token', data.data['access_token']);
@@ -27,11 +28,7 @@ function Login () {
     if (IsSignedIn === false) {
     setIsSignedIn(true)
     }
-    navigate("/DashBoard");
-
-    
-    
-    
+    navigate("/Home");
    }).catch((err) => {
       console.log(err.response.status)
       setError({
@@ -39,31 +36,35 @@ function Login () {
          message: 'Please enter valid credentials'
       })
       return err.response})};
-    const errorHandler = () => {
+      const errorHandler = () => {
       setError(null);
     }
    return (
-   <div>
+  <div className="body">
       {error && <ErrorModal title={error.title} message={error.message} onConfirm= {errorHandler} />}
-      <div>  
-        <main className="form-signin w-100 m-auto">
-          <form method="post" onSubmit= {handleSubmit}>
-            <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-            <div className="form-floating">
-            <input  className="form-control" id="floatingInput" placeholder="name@example.com" value={email} onChange= {(e) => setEmail(e.target.value)} type="email" name="email"/> 
-            <label htmlFor="floatingInput">Email address:</label>
-            </div>
-            <div className="form-floating">
-            <input className="form-control" id="floatingPassword" placeholder="Password" value={password} onChange= {(e) => setPassword(e.target.value)} type="password" name="Password"/>
-          <label htmlFor="floatingPassword">Password:</label>
-          
-          </div>
-          <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-       </form>
-        </main>
-       </div>
-    </div>
+      <form className="form-login" method="post" onSubmit={handleSubmit}>
+
+         <h1 className="form-login__message">Please Login</h1>
+
+         <div className="form-login__lable">
+            <label>Email</label>
+            <br></br>
+            <input id="Input" placeholder="name@example.com" value={EnteredEmail} onChange= {(e) => setEnteredEmail(e.target.value)} type="email" name="email"/>
+         </div>
+            
+         <div className="form-login__lable">
+            <label>Password</label>
+            <br></br>
+            <input id="Password" placeholder="Password" value={EnteredPassword} onChange= {(e) => setEnteredPassword(e.target.value)} type="password" name="Password"/>
+         </div>
+
+         <div>
+            <button className="form-login__button" type="submit">Login</button>
+         </div>
+
+      </form>
+        
+   </div>
    )  
-    
    }
 export default Login
