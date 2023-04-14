@@ -1,5 +1,17 @@
-.header{
-  background-color:#6467c6;
+
+.body #home, html #home
+{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+.Header{
+  margin-top: 1%;
+  margin-bottom: 2.5%;
+  background-color: #221C35;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 .logout__button {
@@ -8,8 +20,8 @@
  font-size: large;
  background-color:  #4A25AA;
  border-radius: 10px;
- padding-left: 2%;
- padding-right: 2%;
+ padding-left: 1%;
+ padding-right: 1%;
  padding-top: 1%;
  padding-bottom: 1%;
 }
@@ -24,8 +36,8 @@
     justify-content: center;
     align-items: center;
     margin:auto;
-    
   }
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);

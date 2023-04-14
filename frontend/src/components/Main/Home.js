@@ -46,6 +46,7 @@ useEffect( () => {
       await axios.get(`${rootUrl}/dev/monitor/lambda/`, config)
         .then(response => {
           setRows(response.data.body);
+          console.log(response.data.body)
         })
         .catch(err => console.error);
      }
@@ -72,15 +73,15 @@ const columns = [
 
  return (
 <div>
-  <header className="header">
+  <header className="Header">
       <Link to ="/logout" className="logout__button">Logout</Link>
   </header>
-
-  <div className="App" >
-    <h1> DAAS Service Monitor AutoRefresh = {autoRefresh}</h1>
+ 
+  <div className="App">
+    <h1 className="App" id="h1"> DAAS Service Monitor AutoRefresh = {autoRefresh}</h1>
     {loading ?(<div className="spinning-loader">
        <ClipLoader loading={loading} size={30}></ClipLoader>
-    </div>) : (<ReactTabulator columns={columns} data={rows} options={options} isLoading = {isLoading}/>) }
+    </div>) : (<ReactTabulator columns={columns} data={rows} options={options} isLoading = {isLoading} />) }
   </div>
 
 </div>
