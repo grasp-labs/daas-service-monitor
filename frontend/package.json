@@ -17,6 +17,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "react-tabulator": "^0.18.1",
     "web-vitals": "^2.1.4"
   },
@@ -29,7 +30,14 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb"
+    ],
+    "rules": {
+       "linebreak-style": "off"
+    },
+     "ignorePatterns": [
+       "**/*.css"
     ]
   },
   "browserslist": {
@@ -48,6 +56,16 @@
     "transform": {
       "^.+\\.[t|j]sx?$": "babel-jest"
     },
-    "transformIgnorePatterns": ["node_modules/(?!@shotgunjed)/"]
+    "transformIgnorePatterns": [
+      "node_modules/(?!@shotgunjed)/"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }

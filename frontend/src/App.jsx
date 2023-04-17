@@ -1,0 +1,18 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './components/Main/Login';
+import Home from './components/Main/Home';
+import Logout from './components/Main/Logout';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/Home" element={<Home />} loginUser={Login.handleSubmit} />
+        <Route path="/logout" element={<Logout />} onclick={Logout} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+export default App;
