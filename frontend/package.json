@@ -33,6 +33,7 @@
       "react-app/jest",
       "airbnb"
     ],
+  
     "rules": {
        "linebreak-style": "off"
     },
@@ -40,6 +41,7 @@
        "**/*.css"
     ]
   },
+
   "browserslist": {
     "production": [
       ">0.2%",

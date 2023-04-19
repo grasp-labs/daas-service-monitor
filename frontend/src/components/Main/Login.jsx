@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -60,7 +59,7 @@ function Login() {
           </div>
 
           <div>
-            {error && <p className="form-login__ErrorMessage" onConfirm={errorHandler}>{error.message}</p>}
+            {error && <p className="form-login__ErrorMessage" onSubmit={errorHandler}>{error.message}</p>}
           </div>
 
           <button className="form-login__button" type="submit">Log in</button>

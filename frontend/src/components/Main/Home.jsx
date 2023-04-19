@@ -43,8 +43,9 @@ function Home() {
       await axios.get(`${rootUrl}/dev/monitor/lambda/`, config)
         .then((response) => {
           setRows(response.data.body);
+          // console.log(response.data.body);
         })
-        .catch((err) => console(err));
+        .catch((err) => console.log(err));
     }
     fetchMetrics();
   }, []);
@@ -80,6 +81,7 @@ function Home() {
           DAAS Service Monitor AutoRefresh =
           {autoRefresh}
         </h1>
+
         {loading ? (
           <div className="spinning-loader">
             <ClipLoader loading={loading} size={30} />
@@ -92,6 +94,7 @@ function Home() {
             isLoading={isLoading}
           />
         )}
+
       </div>
     </div>
   );
