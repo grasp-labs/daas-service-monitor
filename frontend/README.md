@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# DAAS-Service-Monitor
+![Alt text](https://file%2B.vscode-resource.vscode-cdn.net/c%3A/Users/MozhganPourabedin/Documents/GitHub/daas-service-monitor/frontend/Daas%20service%20monitor.jpeg?version%3D1682330351040)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About 
 
-## Available Scripts
+This project is about monitoring runtime of different servers and services to give general overview to end users to see which services are failed and which services are successfully running in the differnt time intervals with provided information such as: 
 
-In the project directory, you can run:
+<li>
+ Services name <br>
+ <li>
+ Initmemory(G) <br>
+ <li>
+Timeout(s) <br>
+<li>
+Last Invocation Time <br>
+<li>
+Duration(s) <br>
+<li>
+Success <br>
+<li>
+Error
 
-### `npm start`
+Based on this information, users can see which servers are running, what is their initial memory in Gigabyte, when they are timed out calculated in seconds, when they are called for the last time and for how long (Duration). If they are running seccessfully or failing; and if they are failed, which type of error exists. Based on this information, users can do some calculations for different purpuses such as costs of servers based on Initial memory for example. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Technologies used <hr>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The information is structured in the format of tabulator tabel. 
 
-### `npm test`
+For more information, please check out the section about [Tabulator Table](https://tabulator.info/)  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Local Run 
 
-### `npm run build`
+### Getting Started with Create React App. 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <hr>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ `React` which is `Javascript` library is used for Front-end applications. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+In order to run the project locally, We use following instructions : <br>
+<li>
+ Open vscode <br>
+ <li>
+ Open the Daas-service-monitor project in vscode <br> 
+<li>
+ In the terminal write:  
+ 
+ `npm start` 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ It will start the development server in [http://localhost:3000](http://localhost:3000). You can view it in your browser. Make sure you are giving the correct path (The specified front-end project path) in terminal.
+  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Testing 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For testing react applications, we use `jest` and `react testing library` libraries Which we import in our test files. <br>
+The steps for testing react projects are following:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - Create test folder inside the project folder.
+  - Create a new test file inside that folder with the .test.js/.test.jsx suffix.
+  - Write the test code inside the file.
+  - Save the test file.
+  - Open a new terminal and write `npm test`.
+  
+Test files will look like something like this: 
 
-## Learn More
+```
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import Login from '../components/Main/Login';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+describe('Login component', () => {
+  test('Login button exists', () => {
+    render(...
+```
+This is a test file for testing login Page. Usually, we have one test file per each conmponent in our project. <br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After all the tests are passed, we can start development of the code. 
 
-### Code Splitting
+For more information, please check out [Testing in React](https://testing-library.com/docs/react-testing-library/example-intro/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+In order to start development, we do the followings in a terminal in vscode:
 
-### Making a Progressive Web App
+```
+1  npx create-react-app my-app
+2  cd my-app
+3  npm start
+```
+pointing to above code snippet; first, we make our application using code in line 1, then we go inside our app with `cd` command (line 2) and we start development server with writing line 3 in terminal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For react projects, we make components, which are basically our functions. Then we export them and import them in other components. The best practice for react projects is to have multiple components and to have leaner components as much as possible and the goal is to make them reusable.
 
-### Advanced Configuration
+For more information, please check out [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+To learn react, please check out [React documentation](https://reactjs.org/).
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## My Tasks
+In this project, my goal was to make the existing daas-service-monitor app pretier. The tasks I did in this project was to:
 
-### `npm run build` fails to minify
+- 1. Sort success filed in the tabulator table to show the failed servers at top of the table.
+-  2. Add loading indicator/snipper in order to show the user to wait until data is fetched and rendered in the browser.
+-  3. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
+-  4. Add testing for login and home page to make sure that the actual result is the same as expected result. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Deployment 
+
+In order to deploy the project, we use these steps. 
+
+First we need to make sure that our project works functionally and all the testing are passed. We use TDD aproach which is test driven development which means we write tests before we develope the code.
+
+After everything is completed, the code will be hosted in github and if everything is confirmed, the code will be merged to main and then it will update the servers in AWS and our project will be deployed. 
+
+In order for deployment in react applications, we use `npm run build` which builds the app to the `build` folder for production. 
+
+For more information, please check out [deployment](https://facebook.github.io/create-react-app/docs/deployment).
+
+
