@@ -103,9 +103,10 @@ To learn react, please check out [React documentation](https://reactjs.org/).
 In this project, my goal was to make the existing daas-service-monitor app pretier. The tasks I did in this project was to:
 
 - 1. Sort success filed in the tabulator table to show the failed servers at top of the table.
--  2. Add loading indicator/snipper in order to show the user to wait until data is fetched and rendered in the browser.
--  3. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
--  4. Add testing for login and home page to make sure that the actual result is the same as expected result. 
+- 2. Add loading indicator/snipper in order to show the user to wait until data is fetched and rendered in the browser.
+- 3. Add auto refresh which refreshes the web page based on defined time interval. 
+- 4. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
+- 5. Add testing for login and home page to make sure that the actual result is the same as expected result. 
 
 
 ## Deployment 
