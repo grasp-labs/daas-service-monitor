@@ -38,15 +38,16 @@ function Home() {
         Accept: 'application/json',
       },
     };
-    async function fetchMetrics() {
-      const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
-      await axios.get(`${rootUrl}/dev/monitor/lambda/`, config)
-        .then((response) => {
-          setRows(response.data.body);
-          // console.log(response.data.body);
-        })
-        .catch((err) => console.log(err));
-    }
+    const fetchMetrics = async () => {
+      try {
+        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
+        const response = await axios.get(`${rootUrl}/dev/monitor/lambda/`, config);
+        setRows(response.data.body);
+        return response;
+      } catch (err) {
+        return err;
+      }
+    };
     fetchMetrics();
   }, []);
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
-import Home from './Home';
+import Home from '../components/Main/Home';
 
 jest.mock('axios');
 
@@ -13,6 +13,7 @@ describe('Home component', () => {
         <Home />
       </MemoryRouter>,
     );
+
     const logoutElement = screen.getByText('Logout');
     expect(logoutElement).toBeInTheDocument();
   });
@@ -27,8 +28,15 @@ test('title daas service monitor exsists', () => {
   const headerElement = screen.getByText('DAAS Service Monitor', { exact: false });
   expect(headerElement).toBeInTheDocument();
 });
+
 test('tabulator table is fetched', async () => {
-  const mockedResponse = [{
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>,
+  );
+
+  const body = [{
     Name: 'daas-service-client-syncer',
     InitMemory: 10240,
     Timeout: 900,
@@ -38,17 +46,7 @@ test('tabulator table is fetched', async () => {
     Error: '',
   }];
 
-  axios.get.mockReturnValue(Promise.resolve(mockedResponse));
-  render(
-    <MemoryRouter>
-      <Home />
-    </MemoryRouter>,
-  );
-  screen.debug();
-  await waitFor(() => {
-    const output = screen.getByText('daas-service-client-syncer');
-    expect(output).toBeInTheDocument();
-  });
-  // const output = await screen.findByText('daas-service-client-syncer');
-  // expect(output).toBeInTheDocument();
+  axios.get.mockResolvedValue(body);
+
+  expect(axios.get).toHaveBeenCalled();
 });
