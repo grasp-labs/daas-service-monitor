@@ -1,3 +1,7 @@
+/**
+ * This module contains App component which is responsible for rendering different routes,
+ *  such as login page, Home page and logout button inside home page.
+ */
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Main/Login';

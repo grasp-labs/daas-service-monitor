@@ -63,7 +63,7 @@ The steps for testing react projects are following:
   
 Test files will look like something like this: 
 
-```
+``` javascript
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -85,7 +85,7 @@ For more information, please check out [Testing in React](https://testing-librar
 
 In order to start development, we do the followings in a terminal in vscode:
 
-```
+``` bash
 1  npx create-react-app my-app
 2  cd my-app
 3  npm start
@@ -104,8 +104,9 @@ In this project, my goal was to make the existing daas-service-monitor app preti
 
 - 1. Sort success filed in the tabulator table to show the failed servers at top of the table.
 -  2. Add loading indicator/snipper in order to show the user to wait until data is fetched and rendered in the browser.
--  3. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
--  4. Add testing for login and home page to make sure that the actual result is the same as expected result. 
+-  3. Add auto refresh which refreshes the web page based on defined time interval. 
+-  4. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
+-  5. Add testing for login and home page to make sure that the actual result is the same as expected result. 
 
 
 ## Deployment 

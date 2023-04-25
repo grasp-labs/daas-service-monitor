@@ -1,21 +1,35 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/**
+ * This module contains a component which is responsible for handling user authentication
+ * and rendering a login form in the browser that allows users to enter their credentials.
+ */
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
 
+/** This login function handles authentication and renders login page. */
 function Login() {
   const [EnteredEmail, setEnteredEmail] = useState('');
   const [EnteredPassword, setEnteredPassword] = useState('');
   const [error, setError] = useState();
   const [IsSignedIn, setIsSignedIn] = useState(false);
   const navigate = useNavigate();
-
   const user = {
     email: EnteredEmail,
     password: EnteredPassword,
   };
 
+  /** handleSubmit function, handles post request with sending user's credentials to identity server
+   * if user's credentials are valid, saves tokens in local storage and nalavigates to home page.
+   * if credentials are not valid, sends the error message back to user.
+   *
+   * @param {void} e - e is the same as event
+   *
+   * @returns {string} access_token -token for accessing the home page.
+   * @returns {string} refresh_token -is used for refreshing since access token will expire soon.
+   * @returns {object} err.response -if credentials are not valid, error message will be returned.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post('https://auth-dev.grasp-daas.com/rest-auth/login/', {
@@ -49,13 +63,25 @@ function Login() {
           <div className="form-login__lable">
             <label htmlFor="email">Email</label>
             <br />
-            <input id="email" data-testid="Email" value={EnteredEmail} onChange={(e) => setEnteredEmail(e.target.value)} type="email" name="email" />
+            <input
+              id="email"
+              value={EnteredEmail}
+              onChange={(e) => setEnteredEmail(e.target.value)}
+              type="email"
+              name="email"
+            />
           </div>
 
           <div className="form-login__lable">
             <label htmlFor="password">Password</label>
             <br />
-            <input id="password" value={EnteredPassword} onChange={(e) => setEnteredPassword(e.target.value)} type="password" name="password" />
+            <input
+              id="password"
+              value={EnteredPassword}
+              onChange={(e) => setEnteredPassword(e.target.value)}
+              type="password"
+              name="password"
+            />
           </div>
 
           <div>

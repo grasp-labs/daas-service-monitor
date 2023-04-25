@@ -1,3 +1,6 @@
+/**
+ * This module contains tests for the Login component.
+ */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -5,6 +8,9 @@ import { MemoryRouter } from 'react-router-dom';
 import Login from '../components/Main/Login';
 
 describe('Login component', () => {
+  /**
+   * This test verifies that login button exists when button is clicked.
+   */
   test('Login button exists', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
@@ -15,6 +21,9 @@ describe('Login component', () => {
     expect(loginElement).toBeInTheDocument();
   });
 
+  /**
+   * This test verifies that Email lable exists in the login page.
+   */
   test('Email lable exists', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
@@ -25,6 +34,9 @@ describe('Login component', () => {
     expect(emailLableNode).toBeInTheDocument();
   });
 
+  /**
+   * This test verifies that Email input exists in the login page.
+   */
   test('Email input exists', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
@@ -35,6 +47,10 @@ describe('Login component', () => {
     expect(emailInputNode.getAttribute('name')).toBe('email');
   });
 
+  /**
+   * This test verifies that user can type in the email input field
+   * and the user types the expected email address in the email input field.
+   */
   test('Email input should accept text which matches with the expected user email input', () => {
     const expectedEmailUserInput = 'demo2@graspdemo.com';
     render(
@@ -48,6 +64,9 @@ describe('Login component', () => {
     expect(emailInputNode.value).toMatch(expectedEmailUserInput);
   });
 
+  /**
+   * This test verifies that password lable exists in the login page.
+   */
   test('password lable exists', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
@@ -58,6 +77,9 @@ describe('Login component', () => {
     expect(loginElement).toBeInTheDocument();
   });
 
+  /**
+   * This test verifies that passowrd input exists in the login page.
+   */
   test('password input exists', () => {
     render(
       <MemoryRouter initialEntries={['/login']}>
@@ -68,6 +90,10 @@ describe('Login component', () => {
     expect(passwordInputNode.getAttribute('name')).toBe('password');
   });
 
+  /**
+   * This test verifies that user can type in the password input field
+   * and the user types the expected password in the password input field.
+   */
   test('Passowrd input should accept text which matches with the expected user password input', () => {
     const expectedPasswordUserInput = 'dummy';
     render(
@@ -81,6 +107,10 @@ describe('Login component', () => {
     expect(passwordInputNode.value).toMatch(expectedPasswordUserInput);
   });
 
+  /**
+   * This test verifies that if user enters wrong email and/or password,
+   * the error message will be shown in the login page.
+   */
   test('renders login error message if login fails', async () => {
     render(
 

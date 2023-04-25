@@ -1,3 +1,6 @@
+/**
+ * This module contains tests for the Home component.
+ */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
@@ -7,6 +10,9 @@ import Home from '../components/Main/Home';
 jest.mock('axios');
 
 describe('Home component', () => {
+/**
+ * This test verifies that logout button exists in the home page.
+ */
   test('Logout button exsists', () => {
     render(
       <MemoryRouter initialEntries={['/logout']}>
@@ -19,6 +25,9 @@ describe('Home component', () => {
   });
 });
 
+/**
+ * This test verifies that The home page has a heading which renders "DAAS Service Monitor".
+ */
 test('title daas service monitor exsists', () => {
   render(
     <MemoryRouter>
@@ -29,6 +38,10 @@ test('title daas service monitor exsists', () => {
   expect(headerElement).toBeInTheDocument();
 });
 
+/**
+ * This test verifies that tabulator table is fetched and we got response when API call is in place.
+ * We use mocking API call instead of actual API call in this test.
+ */
 test('tabulator table is fetched', async () => {
   render(
     <MemoryRouter>

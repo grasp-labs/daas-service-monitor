@@ -1,13 +1,22 @@
-import '../../App.css';
+/**
+ * This moodule contains a component which is responsible for rendering home page as a resposne
+ * in a react tabulator format with information about different servers and services.
+ */
 import { React, useState, useEffect } from 'react';
-import axios from 'axios';
-import 'react-tabulator/lib/styles.css'; // required styles
-import 'react-tabulator/lib/css/tabulator.min.css'; // theme
+import { Link } from 'react-router-dom';
 import { ReactTabulator } from 'react-tabulator';
+import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader';
 import './Home.css';
-import { Link } from 'react-router-dom';
+import '../../App.css';
+import 'react-tabulator/lib/styles.css'; // required styles
+import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 
+/** Home function is resposnible for fetching data.
+ *  Showing loading snipper to show the user to wait until data is fetched.
+ *  Auto refreshing the home page based on set intervals.
+ *  useEffect is used For handling each of these tasks(one useEffect per each task).
+ */
 function Home() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState([false]);
@@ -27,7 +36,6 @@ function Home() {
 
     return () => clearInterval(interval);
   }, []);
-
   useEffect(() => {
     const config = {
       method: 'get',
@@ -38,6 +46,15 @@ function Home() {
         Accept: 'application/json',
       },
     };
+
+    /** This fetchMetrics function is asynchronous function which sends get request to API
+     * and waits for response to be fetched.
+     * if response is successful, update state and returns response which is array of objects.
+     * otherwise it throws error and retruns error.
+     *
+    * @returns {Array} response - returns the response which is array of objects.
+    * @returns {Object} err - returns error whith status code and error message.
+    */
     const fetchMetrics = async () => {
       try {
         const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
