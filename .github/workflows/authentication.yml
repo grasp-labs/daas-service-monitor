@@ -2,14 +2,14 @@ name: Authentication tests
 
 on:
    push:
-    paths: 
-     - src/components/Main/**
+    
 
 jobs:
    test:
     name: Run tests from components/Main folder
-    runs-on: Windows 10 Pro
-    steps: 
+    runs-on: ubuntu-latest
+
+steps: 
      - name: Checkout
        uses: actions/checkout@v3
 
@@ -22,5 +22,5 @@ jobs:
      - name: Install
        run: npm ci  
      - name: Test
-       run: npm run coverage -- --collectCoverageFrom "src/components/Main/**" src/components/Main/tests/
+       run: npm run coverage 
    
