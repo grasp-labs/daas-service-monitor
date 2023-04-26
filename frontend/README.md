@@ -1,5 +1,5 @@
 # DAAS-Service-Monitor
-![Daas service monitor.jpeg](https://file%2B.vscode-resource.vscode-cdn.net/c%3A/Users/MozhganPourabedin/Documents/GitHub/daas-service-monitor/frontend/Daas%20service%20monitor.jpeg?version%3D1682330351040)
+![Daas service monitor](https://user-images.githubusercontent.com/120393053/234086718-64b702a0-0c4f-4364-a81d-a7ba06998806.jpg)
 
 ## About 
 
