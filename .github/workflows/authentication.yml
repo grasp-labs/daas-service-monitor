@@ -1,0 +1,26 @@
+name: Authentication tests
+
+on:
+   push:
+    paths: 
+     - src/components/Main/**
+
+jobs:
+   test:
+    name: Run tests from components/Main folder
+    runs-on: Windows 10 Pro
+    steps: 
+     - name: Checkout
+       uses: actions/checkout@v3
+
+     - name: Setup node
+       uses: actions/setup-node@v3
+       with: 
+        node-version: 16
+        cache: npm
+        cache-dependency-path: package-lock.json
+     - name: Install
+       run: npm ci  
+     - name: Test
+       run: npm run coverage -- --collectCoverageFrom "src/components/Main/**" src/components/Main/tests/
+   

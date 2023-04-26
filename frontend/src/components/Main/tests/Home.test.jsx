@@ -5,7 +5,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
-import Home from '../components/Main/Home';
+import Home from '../Home';
 
 jest.mock('axios');
 
