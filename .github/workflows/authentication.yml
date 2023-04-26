@@ -6,21 +6,20 @@ on:
 
 jobs:
    test:
-    name: Run tests from components/Main folder
-    runs-on: ubuntu-latest
+     name: Run tests from components/Main folder
+     runs-on: ubuntu-latest
+     steps: 
+       - name: Checkout
+         uses: actions/checkout@v3
 
-steps: 
-     - name: Checkout
-       uses: actions/checkout@v3
-
-     - name: Setup node
-       uses: actions/setup-node@v3
-       with: 
-        node-version: 16
-        cache: npm
-        cache-dependency-path: package-lock.json
-     - name: Install
-       run: npm ci  
-     - name: Test
-       run: npm run coverage 
+       - name: Setup node
+         uses: actions/setup-node@v3
+         with: 
+          node-version: 16
+          cache: npm
+          cache-dependency-path: package-lock.json
+       - name: Install
+         run: npm ci  
+       - name: Test
+         run: npm run coverage 
    
