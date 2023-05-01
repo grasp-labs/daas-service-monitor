@@ -1,8 +1,6 @@
 name: Test Job
-on:
-  push:
-    branches:
-      - Feature/mozhgan/auth 
+on: [push]
+ 
     jobs:
   test:
     runs-on: ubuntu-latest
