@@ -39,10 +39,11 @@ function Home() {
   useEffect(() => {
     const config = {
       method: 'get',
+      url: 'http://localhost:8000/lambda',
       headers: {
         Content_Type: 'application/json',
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        'x-api-key': process.env.REACT_APP_API_KEY,
+        //  'x-api-key': process.env.REACT_APP_API_KEY,
         Accept: 'application/json',
       },
     };
@@ -57,17 +58,28 @@ function Home() {
     */
     const fetchMetrics = async () => {
       try {
-        const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
-        const response = await axios.get(`${rootUrl}/dev/monitor/lambda/`, config);
+        // const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
+        // const response = await axios.get(`${rootUrl}/dev/monitor/lambda/`, config);
+
+        const response = await axios.get('http://localhost:8000/lambda', config);
+        console.log(response);
         setRows(response.data.body);
+        console.log(response.data.body);
         return response;
       } catch (err) {
         return err;
       }
     };
+
+    // axios.request(config).then((response) => {
+    // console.log(response.data);
+    // setRows(response.data);
+    // }).catch((error) => {
+    //  console.error(error);
+    // });
+
     fetchMetrics();
   }, []);
-
   const options = {
     initialSort: [{ column: 'Success', dir: 'asc' }],
   };
@@ -90,6 +102,8 @@ function Home() {
 
   return (
     <div>
+      {console.log(JSON.stringify(rows))}
+      {console.log(rows)}
       <header className="Header">
         <Link to="/logout" className="logout__button">Logout</Link>
       </header>

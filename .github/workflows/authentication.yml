@@ -1,26 +1,17 @@
-name: Authentication tests
+name: Test Job
 
-on:
-   push:
-   
-    
+on: [push]
 
 jobs:
-   test:
-     name: Run tests from components/Main folder
-     runs-on: ubuntu-latest
-     steps: 
-       - name: Checkout
-         uses: actions/checkout@v3
-
-       - name: Setup node
-         uses: actions/setup-node@v3
-         with: 
-           node-version: 16
-           cache: npm
-           cache-dependency-path: frontend/package-lock.json
-       - name: Install
-         run: npm ci
-       - name: Test
-         run: npm run coverage 
-   
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+    - name: Install dependencies
+      run: npm install
+    - name: Run tests
+      run: npm test
