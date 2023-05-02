@@ -7,6 +7,7 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
+// import Cookies from 'js-cookie';
 
 /** This login function handles authentication and renders login page. */
 function Login() {

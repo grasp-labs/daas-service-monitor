@@ -11,6 +11,7 @@ import './Home.css';
 import '../../App.css';
 import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
+// import Cookies from 'js-cookie';
 
 /** Home function is resposnible for fetching data.
  *  Showing loading snipper to show the user to wait until data is fetched.
@@ -37,17 +38,6 @@ function Home() {
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
-    const config = {
-      method: 'get',
-      url: 'http://localhost:8000/lambda',
-      headers: {
-        Content_Type: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        //  'x-api-key': process.env.REACT_APP_API_KEY,
-        Accept: 'application/json',
-      },
-    };
-
     /** This fetchMetrics function is asynchronous function which sends get request to API
      * and waits for response to be fetched.
      * if response is successful, update state and returns response which is array of objects.
@@ -56,27 +46,24 @@ function Home() {
     * @returns {Array} response - returns the response which is array of objects.
     * @returns {Object} err - returns error whith status code and error message.
     */
+
     const fetchMetrics = async () => {
       try {
-        // const rootUrl = process.env.NODE_ENV === 'production' ? 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com' : '';
-        // const response = await axios.get(`${rootUrl}/dev/monitor/lambda/`, config);
-
+        const config = {
+          method: 'get',
+          headers: {
+            Content_Type: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            Accept: 'application/json',
+          },
+        };
         const response = await axios.get('http://localhost:8000/lambda', config);
-        console.log(response);
-        setRows(response.data.body);
-        console.log(response.data.body);
+        setRows(response.data);
         return response;
       } catch (err) {
         return err;
       }
     };
-
-    // axios.request(config).then((response) => {
-    // console.log(response.data);
-    // setRows(response.data);
-    // }).catch((error) => {
-    //  console.error(error);
-    // });
 
     fetchMetrics();
   }, []);
@@ -102,8 +89,6 @@ function Home() {
 
   return (
     <div>
-      {console.log(JSON.stringify(rows))}
-      {console.log(rows)}
       <header className="Header">
         <Link to="/logout" className="logout__button">Logout</Link>
       </header>

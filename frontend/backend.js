@@ -9,25 +9,22 @@ const app = express();
 app.use(cors());
 
 app.get('/lambda', async (_req, res) => {
-  // const response = await axios.get('https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com/ev/monitor/lambda/', config);
-  // console.log(response);
-  const config = {
-    method: 'get',
-    url: 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com/dev/monitor/lambda',
-    headers: {
-      Content_Type: 'application/json',
-      // Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      'x-api-key': process.env.REACT_APP_API_KEY,
-      Accept: 'application/json',
-    },
-  };
+  try {
+    const config = {
+      method: 'get',
+      url: 'https://ollq6b7h96.execute-api.eu-north-1.amazonaws.com/dev/monitor/lambda',
+      headers: {
+        Content_Type: 'application/json',
+        'x-api-key': process.env.REACT_APP_API_KEY,
+        Accept: 'application/json',
+      },
+    };
 
-  await axios.request(config).then((response) => {
+    const response = await axios.request(config);
     res.json(response.data.body);
-    console.log(response.data.body);
-  }).catch((error) => {
-    console.error(error);
-  });
+  } catch (error) {
+    res.status(500).send('Internal server error');
+  }
 });
 
-app.listen(8000, () => console.log(`server is running on port ${PORT}`));
+app.listen(8000, () => (`server is running on port ${PORT}`));
