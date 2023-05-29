@@ -107,6 +107,22 @@ In this project, my goal was to make the existing daas-service-monitor app preti
 -  3. Add auto refresh which refreshes the web page based on defined time interval. 
 -  4. Add security layer to this application by adding login page and authentication aspect. The user needs to first login in order to see the home page. 
 -  5. Add testing for login and home page to make sure that the actual result is the same as expected result. 
+-  6. Hiding API keys.
+
+### Hiding API keys:
+
+The goal for this task is to give some security layer to our application. API keys are sensitvie information and they should not be exposed to the end-users. In order to hide api keys, we do the following steps.
+
+ 1. As a first step, they should be stored in envrienment variables which are stored in gitignore file. by default, gitignore file is not commited to github accidently. but this is not enough. Users can simply get access to API keys by using developer tools. 
+ 2. Therefore, we need to store them somewhere inside server instead of browser. So, for that we define a backend file which will handle sending http request instead of frontend file. because the server side file is not exposed to the end users. Here are the steps to run the server locally: 
+   <li> 
+   We install a package called nodemon inside of project foled with `npm install nodemon`  <br>
+   <li>
+   Then inside package.json in scripts we add this command like this: `"scripts": {
+    "start:backend": "nodemon backend.js",`  <br>
+  <li>
+  And in another terminal inside our project folder, we run this command `npm run start:backend`. This will start our backend server locaaly. <br> 
+
 
 
 ## Deployment 
