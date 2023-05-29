@@ -35,4 +35,4 @@ app.get('/lambda', async (_req, res) => {
   }
 });
 
-app.listen(8000, () => (`server is running on port ${PORT}`));
+app.listen(`${PORT}`, () => (`server is running on port ${PORT}`));

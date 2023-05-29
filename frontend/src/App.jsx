@@ -13,8 +13,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/Home" element={<Home />} loginUser={Login.handleSubmit} />
-        <Route path="/logout" element={<Logout />} onclick={Logout} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

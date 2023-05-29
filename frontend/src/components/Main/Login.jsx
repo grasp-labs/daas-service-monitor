@@ -7,18 +7,17 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-// import Cookies from 'js-cookie';
 
 /** This login function handles authentication and renders login page. */
 function Login() {
-  const [EnteredEmail, setEnteredEmail] = useState('');
-  const [EnteredPassword, setEnteredPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState();
   const [IsSignedIn, setIsSignedIn] = useState(false);
   const navigate = useNavigate();
   const user = {
-    email: EnteredEmail,
-    password: EnteredPassword,
+    email,
+    password,
   };
 
   /** handleSubmit function, handles post request with sending user's credentials to identity server
@@ -66,8 +65,8 @@ function Login() {
             <br />
             <input
               id="email"
-              value={EnteredEmail}
-              onChange={(e) => setEnteredEmail(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
             />
@@ -78,8 +77,8 @@ function Login() {
             <br />
             <input
               id="password"
-              value={EnteredPassword}
-              onChange={(e) => setEnteredPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
             />

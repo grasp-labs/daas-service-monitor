@@ -83,14 +83,14 @@ For more information, please check out [Testing in React](https://testing-librar
 
 ## Development
 
-In order to start development, we do the followings in a terminal in vscode:
+In order to start development in this project, we do the followings in a terminal in vscode:
 
 ``` bash
-1  npx create-react-app my-app
-2  cd my-app
+1  cd my-app
+2  npm install 
 3  npm start
 ```
-pointing to above code snippet; first, we make our application using code in line 1, then we go inside our app with `cd` command (line 2) and we start development server with writing line 3 in terminal.
+pointing to above code snippet; first, we navigate to our app/project with `cd` command (line 1) and then we install all the dependencies needed with `npm install` (line2 ) in the project folder and finally we start development server with `npm start` (line 3) in terminal.
 
 For react projects, we make components, which are basically our functions. Then we export them and import them in other components. The best practice for react projects is to have multiple components and to have leaner components as much as possible and the goal is to make them reusable.
 

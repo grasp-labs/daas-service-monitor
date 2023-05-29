@@ -11,7 +11,6 @@ import './Home.css';
 import '../../App.css';
 import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
-// import Cookies from 'js-cookie';
 
 /** Home function is resposnible for fetching data.
  *  Showing loading snipper to show the user to wait until data is fetched.
@@ -21,7 +20,8 @@ import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 function Home() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState([false]);
-  const [autoRefresh, setAutoRefresh] = useState(0);
+  const [error, setError] = useState([false]);
+  const setAutoRefresh = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -36,7 +36,7 @@ function Home() {
     }, 600000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [setAutoRefresh]);
   useEffect(() => {
     /** This fetchMetrics function is asynchronous function which sends get request to API
      * and waits for response to be fetched.
@@ -59,14 +59,13 @@ function Home() {
         };
         const response = await axios.get('http://localhost:8000/lambda', config);
         setRows(response.data);
-        return response;
       } catch (err) {
-        return err;
+        setError(error);
       }
     };
 
     fetchMetrics();
-  }, []);
+  }, [error]);
   const options = {
     initialSort: [{ column: 'Success', dir: 'asc' }],
   };
@@ -95,8 +94,7 @@ function Home() {
 
       <div className="App">
         <h1 className="App" id="h1">
-          DAAS Service Monitor AutoRefresh =
-          {autoRefresh}
+          DAAS Service Monitor
         </h1>
 
         {loading ? (
