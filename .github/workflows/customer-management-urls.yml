@@ -1,4 +1,4 @@
-name: "Close stale issues"
+name: "Customer managerment endpoints"
 on:
   schedule:
   - cron: "*/10 * * * *"
@@ -11,14 +11,9 @@ jobs:
       uses: vcnc-hex/url-health-check-action@v2
       with:
         # Check the following URLs one by one sequentially
-        url: https://grasp-daas.com/api/cm-dev/health-check/
-        # Max time to keep requesting url
-        max-time: 1m
-        # Max time until a request times out
-        request-timeout: 10s
-        # Fail this action after this many failed attempts
-        # set to "until-max-time" to request forever
-        max-attempts: 1 # Optional, defaults to 1
+        url: https://grasp-daas.com/api/cm-dev/v1/health-check/        
+        max-time: 1m        
+        request-timeout: 10s                
         # Delay between retries
         retry-delay: 1s
     
